@@ -1,9 +1,13 @@
 # User interface using Gradio
-
+import os
+import sys
+import asyncio
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.LLM_utils import llm_response
 import gradio as gr
 
-def respond(message, chat_history):
+
+async def respond(message, chat_history):
     """
     Appends user message and a placeholder bot response ("Typing...") to the chat history.
     Then replaces it with the final response.
@@ -18,8 +22,7 @@ def respond(message, chat_history):
     """
     response = "Typing..."
     chat_history.append((message, response))
-
-    final_response = llm_response(message)   
+    final_response = await llm_response(message)   
 
     chat_history[-1] = (message, final_response)
     return "", chat_history
@@ -239,3 +242,6 @@ def launch_chatbot():
         clear.click(lambda: [], None, chatbot, queue=False)
 
     demo.launch(share=True)
+
+if __name__ == "__main__":
+    launch_chatbot()
