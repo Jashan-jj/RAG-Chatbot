@@ -1,12 +1,11 @@
 # Main program
-
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.search_utils import search_web, search_news
 from utils.db_utils import insert_all_chunks, insert_all_documents
 from utils.text_utils import chunk_text
-from utils.user_interface import launch_chatbot
+# from utils.user_interface import launch_chatbot
 from src.etl import extract_all_html, index_documents
 import asyncio
 
@@ -52,8 +51,8 @@ async def ingestion(query, nb_docs = 10):
     await index_documents()
     print("\n\nAll done")
 
-if __name__ == "__main__":
-    launch_chatbot()
+# if __name__ == "__main__":
+#     launch_chatbot()
     
     
 
