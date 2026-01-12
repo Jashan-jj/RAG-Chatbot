@@ -10,7 +10,6 @@ from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import LLMChain
 from app import ingestion
-
 load_dotenv()
 
 google_api_key = os.getenv("GOOGLE_API_KEY")

@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.LLM_utils import llm_response
 import gradio as gr
 
+
 async def respond(message, chat_history):
     """
     Appends user message and a placeholder bot response ("Typing...") to the chat history.
