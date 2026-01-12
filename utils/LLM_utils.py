@@ -1,19 +1,21 @@
 # Code for all Large Language Model (LLM)-related functionalities.
-
 import os
+import sys
+import asyncio
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from dotenv import load_dotenv
 from src.retrieval_engine import search_chunks
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import LLMChain
-
+from app import ingestion
 load_dotenv()
 
 google_api_key = os.getenv("GOOGLE_API_KEY")
 os.environ["GOOGLE_API_KEY"] = google_api_key
 
-llm = ChatGoogleGenerativeAI(model = "gemini-2.0-flash")
+llm = ChatGoogleGenerativeAI(model = "gemini-2.5-flash")
 
 def rank_chunks(query, chunks):
     """
@@ -95,7 +97,7 @@ def llm_call(query, support_material):
     
     return response
 
-def llm_response(query):
+async def llm_response(query):
     """
     Makes the final call to the LLM to elicit a response.
 
@@ -105,7 +107,7 @@ def llm_response(query):
     Returns:
         response: Response to the query by the LLM
     """
-
+    await ingestion(query)
     top_chunks = search_chunks(query, 5, "web")
     reranked = rank_chunks(query, top_chunks)
     response = llm_call(query, reranked)
