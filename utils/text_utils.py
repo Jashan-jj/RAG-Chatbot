@@ -1,6 +1,6 @@
 # Code for all text-related functionalities.
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 import uuid
 import sys
