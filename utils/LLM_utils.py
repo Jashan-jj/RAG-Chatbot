@@ -8,6 +8,7 @@ from src.retrieval_engine import search_chunks
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
+#from langchain.memory import ConversationBufferMemory
 from langchain.chains import LLMChain
 from app import ingestion
 load_dotenv()
